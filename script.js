@@ -10,9 +10,6 @@ function one(button){
     fun.value += button
 }
 
-
-
-
 function dele(button){
 fun.value = ""
 }
@@ -24,11 +21,12 @@ function one1C(button){
 
 var money = 75000
 var pin = 1234
-
+var signedIn = false;
 
 
 function entersub() {
     if(fun.value == pin){
+        signedIn = true
         fun.value = "Correct select an option below"
 
     }
@@ -43,31 +41,58 @@ function entersub() {
 }
 
 function dep() {
-    var plus = Number(fun.value) 
+    if(signedIn){
 
-    var depp = plus + money
+      if(isNaN(fun.value) || fun.value <= 0){
+        fun.value = "Please enter valid amount"
+      }
 
-    
-    fun.value = "Deposit succesfully now total balance is $" + depp
-    
+      else{
+        var plus = Number(fun.value) 
+
+        var depp = plus + money
+        money = depp
+        fun.value = "Deposit succesfully now total balance is $" + depp
+      }
+      
+    } else{
+        fun.value = "Pin requird"
+   }
+   
  }
 
  
  function withd() {
 
-    var minuss = Number(fun.value) 
+    if(signedIn){
 
-  var tot  = money  - minuss
-    fun.value =  "Withdraw succesfully now total balance is $" + tot
+      if(isNaN(fun.value) || fun.value <= 0){
+        fun.value = "Please enter valid amount"
+      }
 
-    
+      else{
+        var minuss = Number(fun.value) 
+        var tot  = money  - minuss
+        money = tot
+          fun.value =  "Withdraw succesfully now total balance is $" + tot
+      
+      }
+   
+  }   else{
+    fun.value = "Pin required"
+}
     
  }
 
  function bal() {
+    if(signedIn){
 
     fun.value =  "Your total balance... $" + money
-            
+  }
+  else{
+    fun.value = "Pin requird"
+}
+  
  }
 
 
